@@ -125,7 +125,7 @@ function BookList() {
         ))}
       </div>
       <BookModal
-        show={setSelectedBookAsin !== null}
+        show={selectedBookAsin !== null}
         onHide={() => handleBookSelect(null)}
         book={filteredBooks.find((book) => book.asin === selectedBookAsin)}
         comments={comments}

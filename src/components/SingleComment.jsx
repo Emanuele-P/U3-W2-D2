@@ -1,26 +1,27 @@
 import { Button, ListGroup } from 'react-bootstrap'
 
 const SingleComment = ({ comment }) => {
-  const deleteComment = async (selectedBookAsin) => {
-    try {
-      const URL = `https://striveschool-api.herokuapp.com/api/comments/`
-      const API_KEY =
-        'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjE4ZWFkNzdmMzA0NjAwMWFlNTlmNmIiLCJpYXQiOjE3MTQzOTU2NzIsImV4cCI6MTcxNTYwNTI3Mn0.yfjMncpvzwOYpP_vBTE0BmCHEdXvANwDaV06LcyBt3o'
+  const deleteComment = (selectedBookAsin) => {
+    const URL = `https://striveschool-api.herokuapp.com/api/comments/`
+    const API_KEY =
+      'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NjE4ZWFkNzdmMzA0NjAwMWFlNTlmNmIiLCJpYXQiOjE3MTQzOTU2NzIsImV4cCI6MTcxNTYwNTI3Mn0.yfjMncpvzwOYpP_vBTE0BmCHEdXvANwDaV06LcyBt3o'
 
-      let response = await fetch(URL + selectedBookAsin, {
-        method: 'DELETE',
-        headers: {
-          Authorization: API_KEY,
-        },
+    fetch(URL + selectedBookAsin, {
+      method: 'DELETE',
+      headers: {
+        Authorization: API_KEY,
+      },
+    })
+      .then((response) => {
+        if (response.ok) {
+          alert('This comment has been deleted')
+        } else {
+          throw new Error('Comment not deleted')
+        }
       })
-      if (response.ok) {
-        alert('This comment has been deleted')
-      } else {
-        throw new Error('Comment not deleted')
-      }
-    } catch (error) {
-      alert(error)
-    }
+      .catch((error) => {
+        alert(error.message)
+      })
   }
 
   return (
