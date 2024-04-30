@@ -36,6 +36,7 @@ function CommentModal(props) {
       .then((data) => {
         console.log('Comment added successfully', data)
         alert('Comment added successfully')
+        props.refreshComments()
       })
       .catch((error) => {
         console.error('Error adding comment:', error)

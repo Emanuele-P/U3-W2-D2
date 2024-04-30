@@ -48,10 +48,13 @@ function BookList() {
   }
 
   useEffect(() => {
-    if (selectedBookAsin) {
-      fetchComments()
-    }
+    fetchComments()
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedBookAsin])
+
+  const refreshComments = () => {
+    fetchComments()
+  }
 
   const fetchComments = () => {
     const URL = `https://striveschool-api.herokuapp.com/api/comments/${selectedBookAsin}`
@@ -130,10 +133,12 @@ function BookList() {
         book={filteredBooks.find((book) => book.asin === selectedBookAsin)}
         comments={comments}
         handleShowCommentModal={toggleCommentModal}
+        refreshComments={refreshComments}
       />
       <CommentModal
         show={showCommentModal}
         onHide={() => setShowCommentModal(false)}
+        refreshComments={refreshComments}
         selectedBookAsin={selectedBookAsin}
       />
     </Container>

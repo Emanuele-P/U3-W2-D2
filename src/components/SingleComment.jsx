@@ -1,6 +1,6 @@
 import { Button, ListGroup } from 'react-bootstrap'
 
-const SingleComment = ({ comment }) => {
+const SingleComment = (props) => {
   const deleteComment = (selectedBookAsin) => {
     const URL = `https://striveschool-api.herokuapp.com/api/comments/`
     const API_KEY =
@@ -15,6 +15,7 @@ const SingleComment = ({ comment }) => {
       .then((response) => {
         if (response.ok) {
           alert('This comment has been deleted')
+          props.refreshComments()
         } else {
           throw new Error('Comment not deleted')
         }
@@ -26,11 +27,11 @@ const SingleComment = ({ comment }) => {
 
   return (
     <ListGroup.Item className="d-flex justify-content-between align-items-center">
-      <p className="mb-0 flex-grow-1">{comment.comment}</p>
+      <p className="mb-0 flex-grow-1">{props.comment.comment}</p>
       <Button
         variant="danger"
         className="ms-2"
-        onClick={() => deleteComment(comment._id)}
+        onClick={() => deleteComment(props.comment._id)}
       >
         <i className="bi bi-trash3"></i>
       </Button>
